@@ -1,3 +1,9 @@
+import { Montserrat_400Regular } from '@expo-google-fonts/montserrat/400Regular';
+import { Montserrat_500Medium } from '@expo-google-fonts/montserrat/500Medium';
+import { Montserrat_600SemiBold } from '@expo-google-fonts/montserrat/600SemiBold';
+import { Montserrat_700Bold } from '@expo-google-fonts/montserrat/700Bold';
+import { Montserrat_800ExtraBold } from '@expo-google-fonts/montserrat/800ExtraBold';
+import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
@@ -8,32 +14,41 @@ import { colores, fuentes } from '../constants/tema';
 import { useBiblioteca } from '../hooks/useBiblioteca';
 import { configurarPresentacion } from '../lib/notificaciones';
 
-// El splash queda visible hasta que se leen los datos guardados:
-// así la app nunca se muestra "vacía" un instante.
+// El splash queda visible hasta que se leen los datos guardados y se
+// cargan las fuentes: así la app nunca se muestra "vacía" un instante.
+// Si la fuente falla, se sigue con la del sistema.
 export default function NavegacionRaiz() {
   const { listo, sesionIniciada } = useBiblioteca();
+  const [fuentesListas, errorFuentes] = useFonts({
+    Montserrat_400Regular,
+    Montserrat_500Medium,
+    Montserrat_600SemiBold,
+    Montserrat_700Bold,
+    Montserrat_800ExtraBold,
+  });
+  const preparado = listo && (fuentesListas || errorFuentes !== null);
 
   useEffect(() => {
     configurarPresentacion();
   }, []);
 
   useEffect(() => {
-    if (listo) {
+    if (preparado) {
       SplashScreen.hideAsync();
     }
-  }, [listo]);
+  }, [preparado]);
 
-  if (!listo) {
+  if (!preparado) {
     return null;
   }
 
   return (
     <>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       <Stack
         screenOptions={{
           headerStyle: estilos.cabecera,
-          headerTintColor: colores.tinta,
+          headerTintColor: colores.blanco,
           headerTitleStyle: estilos.titulo,
           headerShadowVisible: false,
           headerBackButtonDisplayMode: 'minimal',
@@ -67,13 +82,13 @@ export default function NavegacionRaiz() {
 
 const estilos = StyleSheet.create({
   cabecera: {
-    backgroundColor: colores.papel,
+    backgroundColor: colores.primario,
   },
   titulo: {
-    fontFamily: fuentes.serif,
-    color: colores.tinta,
+    fontFamily: fuentes.extra,
+    color: colores.blanco,
   },
   contenido: {
-    backgroundColor: colores.papel,
+    backgroundColor: colores.fondo,
   },
 });
