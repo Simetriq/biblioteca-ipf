@@ -48,20 +48,20 @@ const estilos = StyleSheet.create({
     paddingVertical: espacios.l,
     paddingHorizontal: espacios.l,
     borderBottomWidth: medidas.borde,
-    borderBottomColor: colores.linea,
+    borderBottomColor: colores.borde,
   },
   datos: {
     flex: 1,
     gap: espacios.xs,
   },
   titulo: {
-    fontFamily: fuentes.serif,
+    fontFamily: fuentes.negrita,
     fontSize: tamanios.medio,
-    color: colores.tinta,
+    color: colores.texto,
   },
   detalle: {
     fontSize: tamanios.chico,
-    color: colores.tintaSuave,
+    color: colores.textoSuave,
   },
   accion: {
     marginTop: espacios.s,

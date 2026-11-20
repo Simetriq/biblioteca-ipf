@@ -78,29 +78,28 @@ export default function Mostrador() {
 const estilos = StyleSheet.create({
   pantalla: {
     flex: 1,
-    backgroundColor: colores.papel,
+    backgroundColor: colores.fondo,
   },
   cabecera: {
     padding: espacios.l,
     borderBottomWidth: medidas.borde,
-    borderBottomColor: colores.tinta,
+    borderBottomColor: colores.texto,
   },
   titulo: {
-    fontFamily: fuentes.serif,
+    fontFamily: fuentes.negrita,
     fontSize: tamanios.titulo,
-    color: colores.tinta,
+    color: colores.texto,
   },
   texto: {
     marginTop: espacios.xs,
     fontSize: tamanios.chico,
-    color: colores.tintaSuave,
+    color: colores.textoSuave,
   },
   ultimo: {
     marginTop: espacios.m,
-    fontFamily: fuentes.serif,
-    fontStyle: 'italic',
+    fontFamily: fuentes.negrita,
     fontSize: tamanios.base,
-    color: colores.bosque,
+    color: colores.primario,
   },
   pie: {
     padding: espacios.xl,

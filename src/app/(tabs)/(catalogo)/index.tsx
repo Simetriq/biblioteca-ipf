@@ -3,7 +3,7 @@ import { FlatList, StyleSheet } from 'react-native';
 import EncabezadoCatalogo from '@/components/EncabezadoCatalogo';
 import EstadoCarga from '@/components/EstadoCarga';
 import EstadoMensaje from '@/components/EstadoMensaje';
-import FilaLibro from '@/components/FilaLibro';
+import TarjetaLibro from '@/components/TarjetaLibro';
 import { espacios } from '@/constants/tema';
 import { useBiblioteca } from '@/hooks/useBiblioteca';
 import { useLibros } from '@/hooks/useLibros';
@@ -11,7 +11,7 @@ import { ejemplaresDisponibles } from '@/lib/catalogo';
 
 export default function Catalogo() {
   const { libros, cargando, error, reintentar } = useLibros();
-  const { recientes, prestamos } = useBiblioteca();
+  const { recientes, prestamos, esperas } = useBiblioteca();
 
   function renderVacio() {
     if (cargando) {
@@ -40,8 +40,14 @@ export default function Catalogo() {
     <FlatList
       data={cargando || error ? [] : libros}
       keyExtractor={(libro) => libro.isbn}
+      numColumns={2}
+      columnWrapperStyle={estilos.columnas}
       renderItem={({ item }) => (
-        <FilaLibro libro={item} disponibles={ejemplaresDisponibles(item, prestamos)} />
+        <TarjetaLibro
+          libro={item}
+          disponibles={ejemplaresDisponibles(item, prestamos)}
+          enEspera={esperas[item.isbn]?.tamanio ?? 0}
+        />
       )}
       ListHeaderComponent={<EncabezadoCatalogo recientes={recientes} />}
       ListEmptyComponent={renderVacio()}
@@ -53,5 +59,10 @@ export default function Catalogo() {
 const estilos = StyleSheet.create({
   lista: {
     paddingBottom: espacios.xxl,
+    gap: espacios.m,
+  },
+  columnas: {
+    gap: espacios.m,
+    paddingHorizontal: espacios.l,
   },
 });

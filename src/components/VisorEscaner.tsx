@@ -44,14 +44,14 @@ const estilos = StyleSheet.create({
     width: '78%',
     height: '42%',
     borderWidth: medidas.borde * 2,
-    borderColor: colores.ocre,
+    borderColor: colores.primario,
     borderRadius: radios.m,
   },
   ayuda: {
     position: 'absolute',
     bottom: espacios.m,
     fontSize: tamanios.chico,
-    color: colores.hoja,
+    color: colores.blanco,
   },
   aviso: {
     position: 'absolute',
@@ -60,11 +60,11 @@ const estilos = StyleSheet.create({
     right: espacios.m,
     padding: espacios.s,
     borderRadius: radios.m,
-    backgroundColor: colores.terracota,
+    backgroundColor: colores.alerta,
   },
   avisoTexto: {
     fontSize: tamanios.chico,
-    color: colores.hoja,
+    color: colores.blanco,
     textAlign: 'center',
   },
 });

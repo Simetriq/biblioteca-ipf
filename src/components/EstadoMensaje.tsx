@@ -36,23 +36,23 @@ const estilos = StyleSheet.create({
   marca: {
     width: medidas.marca.ancho,
     height: medidas.marca.alto,
-    backgroundColor: colores.ocre,
+    backgroundColor: colores.primario,
     marginBottom: espacios.l,
   },
   marcaError: {
-    backgroundColor: colores.terracota,
+    backgroundColor: colores.alerta,
   },
   titulo: {
-    fontFamily: fuentes.serif,
+    fontFamily: fuentes.negrita,
     fontSize: tamanios.medio,
-    color: colores.tinta,
+    color: colores.texto,
     textAlign: 'center',
   },
   detalle: {
     marginTop: espacios.s,
     fontSize: tamanios.base,
     lineHeight: tamanios.base * 1.45,
-    color: colores.tintaSuave,
+    color: colores.textoSuave,
     textAlign: 'center',
   },
   accion: {

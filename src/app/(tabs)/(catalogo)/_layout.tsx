@@ -13,7 +13,7 @@ export default function CatalogoLayout() {
     <Stack
       screenOptions={{
         headerStyle: estilos.cabecera,
-        headerTintColor: colores.tinta,
+        headerTintColor: colores.blanco,
         headerTitleStyle: estilos.titulo,
         headerShadowVisible: false,
         headerBackButtonDisplayMode: 'minimal',
@@ -33,13 +33,13 @@ export default function CatalogoLayout() {
 
 const estilos = StyleSheet.create({
   cabecera: {
-    backgroundColor: colores.papel,
+    backgroundColor: colores.primario,
   },
   titulo: {
-    fontFamily: fuentes.serif,
-    color: colores.tinta,
+    fontFamily: fuentes.extra,
+    color: colores.blanco,
   },
   contenido: {
-    backgroundColor: colores.papel,
+    backgroundColor: colores.fondo,
   },
 });

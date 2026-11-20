@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text } from 'react-native';
 
-import { colores, espacios, fuentes, medidas, radios, tamanios } from '../constants/tema';
+import { colores, espacios, fuentes, letras, medidas, radios, tamanios } from '../constants/tema';
 
 type Variante = 'primario' | 'secundario' | 'alerta' | 'enlace';
 
@@ -29,7 +29,7 @@ export default function Boton({
       style={({ pressed }) => [
         estilos.base,
         estilos[variante],
-        pressed && estilos.presionado,
+        pressed && (variante === 'primario' ? estilos.primarioPresionado : estilos.presionado),
         deshabilitado && estilos.deshabilitado,
       ]}>
       <Text
@@ -49,51 +49,54 @@ const estilos = StyleSheet.create({
   base: {
     minHeight: medidas.areaTactil,
     minWidth: medidas.areaTactil,
-    paddingHorizontal: espacios.l,
+    paddingHorizontal: espacios.xl,
     paddingVertical: espacios.m,
-    borderRadius: radios.m,
+    borderRadius: radios.s,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: medidas.borde,
   },
   primario: {
-    backgroundColor: colores.bosque,
-    borderColor: colores.bosque,
+    backgroundColor: colores.primario,
+    borderColor: colores.primario,
+  },
+  primarioPresionado: {
+    backgroundColor: colores.primarioOscuro,
+    borderColor: colores.primarioOscuro,
   },
   secundario: {
-    backgroundColor: colores.hoja,
-    borderColor: colores.tinta,
+    backgroundColor: colores.blanco,
+    borderColor: colores.texto,
   },
   alerta: {
-    backgroundColor: colores.hoja,
-    borderColor: colores.terracota,
+    backgroundColor: colores.blanco,
+    borderColor: colores.alerta,
   },
   enlace: {
-    borderColor: colores.papel,
+    borderColor: 'transparent',
     paddingHorizontal: espacios.s,
   },
   presionado: {
-    opacity: 0.7,
+    backgroundColor: colores.superficie,
   },
   deshabilitado: {
     opacity: 0.4,
   },
   etiqueta: {
-    color: colores.tinta,
-    fontSize: tamanios.base,
-    fontWeight: '600',
-    letterSpacing: 0.2,
+    color: colores.texto,
+    fontSize: tamanios.chico,
+    fontFamily: fuentes.negrita,
+    letterSpacing: letras.ancho,
+    textTransform: 'uppercase',
   },
   etiquetaClara: {
-    color: colores.hoja,
+    color: colores.blanco,
   },
   etiquetaAlerta: {
-    color: colores.terracota,
+    color: colores.alerta,
   },
   etiquetaEnlace: {
-    color: colores.bosque,
-    fontFamily: fuentes.serif,
-    fontStyle: 'italic',
+    color: colores.primario,
     textDecorationLine: 'underline',
   },
 });

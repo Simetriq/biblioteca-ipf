@@ -1,43 +1,38 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import { colores, espacios, radios, tamanios } from '../constants/tema';
+import { colores, espacios, fuentes, letras, radios, tamanios } from '../constants/tema';
 
 type Props = { cantidad: number };
 
+// Etiqueta rectangular, como el precio de una tarjeta de producto.
 export default function Disponibilidad({ cantidad }: Props) {
   const hay = cantidad > 0;
-  const texto = hay
-    ? `${cantidad} ${cantidad === 1 ? 'disponible' : 'disponibles'}`
-    : 'Sin ejemplares';
+  const texto = hay ? `${cantidad} ${cantidad === 1 ? 'disponible' : 'disponibles'}` : 'Sin stock';
   return (
-    <View style={[estilos.sello, hay ? estilos.hay : estilos.noHay]}>
-      <Text style={[estilos.texto, hay ? estilos.textoHay : estilos.textoNoHay]}>{texto}</Text>
+    <View style={[estilos.etiqueta, hay ? estilos.hay : estilos.noHay]}>
+      <Text style={estilos.texto}>{texto}</Text>
     </View>
   );
 }
 
 const estilos = StyleSheet.create({
-  sello: {
+  etiqueta: {
     alignSelf: 'flex-start',
     paddingHorizontal: espacios.s,
-    paddingVertical: espacios.xxs,
-    borderRadius: radios.pastilla,
+    paddingVertical: espacios.xs,
+    borderRadius: radios.s,
   },
   hay: {
-    backgroundColor: colores.bosqueClaro,
+    backgroundColor: colores.primario,
   },
   noHay: {
-    backgroundColor: colores.terracotaClara,
+    backgroundColor: colores.texto,
   },
   texto: {
     fontSize: tamanios.mini,
-    fontWeight: '700',
-    letterSpacing: 0.3,
-  },
-  textoHay: {
-    color: colores.bosque,
-  },
-  textoNoHay: {
-    color: colores.terracota,
+    fontFamily: fuentes.negrita,
+    color: colores.blanco,
+    textTransform: 'uppercase',
+    letterSpacing: letras.ancho,
   },
 });

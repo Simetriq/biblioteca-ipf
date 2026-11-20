@@ -24,11 +24,11 @@ export function ejemplaresDisponibles(libro: Libro, prestamos: readonly Prestamo
 
 // El color sale de la posición del libro en el catálogo, así dos libros
 // seguidos nunca comparten tapa. Si el ISBN no está, se usa un hash.
-export function colorDeTapa(isbn: string): string {
+export function indiceTapa(isbn: string): number {
   const posicion = LIBROS.findIndex((libro) => libro.isbn === isbn);
   if (posicion >= 0) {
-    return coloresTapa[posicion % coloresTapa.length];
+    return posicion % coloresTapa.length;
   }
   const hash = isbn.split('').reduce((total, caracter) => total * 31 + caracter.charCodeAt(0), 7);
-  return coloresTapa[Math.abs(hash) % coloresTapa.length];
+  return Math.abs(hash) % coloresTapa.length;
 }

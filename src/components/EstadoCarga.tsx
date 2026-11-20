@@ -7,7 +7,7 @@ type Props = { mensaje: string };
 export default function EstadoCarga({ mensaje }: Props) {
   return (
     <View style={estilos.contenedor} accessibilityLiveRegion="polite">
-      <ActivityIndicator color={colores.bosque} />
+      <ActivityIndicator color={colores.primario} />
       <Text style={estilos.mensaje}>{mensaje}</Text>
     </View>
   );
@@ -20,9 +20,8 @@ const estilos = StyleSheet.create({
     gap: espacios.m,
   },
   mensaje: {
-    fontFamily: fuentes.serif,
-    fontStyle: 'italic',
+    fontFamily: fuentes.negrita,
     fontSize: tamanios.base,
-    color: colores.tintaSuave,
+    color: colores.textoSuave,
   },
 });

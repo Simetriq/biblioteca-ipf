@@ -5,7 +5,7 @@ import { FlatList, StyleSheet, TextInput, View } from 'react-native';
 
 import EstadoCarga from '@/components/EstadoCarga';
 import EstadoMensaje from '@/components/EstadoMensaje';
-import FilaLibro from '@/components/FilaLibro';
+import TarjetaLibro from '@/components/TarjetaLibro';
 import { DEMORA_BUSQUEDA_MS } from '@/constants/biblioteca';
 import { colores, espacios, iconos, medidas, radios, tamanios } from '@/constants/tema';
 import { useBiblioteca } from '@/hooks/useBiblioteca';
@@ -18,7 +18,7 @@ export default function Buscar() {
   const q = primerValor(params.q);
   const [texto, setTexto] = useState(q);
   const { consulta, cargando, libros, error } = useBusqueda(q);
-  const { prestamos } = useBiblioteca();
+  const { prestamos, esperas } = useBiblioteca();
 
   // Debounce: la URL se actualiza 300 ms después de la última tecla.
   // setParams reemplaza el parámetro sin apilar pantallas nuevas.
@@ -65,13 +65,13 @@ export default function Buscar() {
   return (
     <View style={estilos.pantalla}>
       <View style={estilos.campoContenedor}>
-        <Ionicons name="search" size={iconos.medio} color={colores.tintaSuave} />
+        <Ionicons name="search" size={iconos.medio} color={colores.textoSuave} />
         <TextInput
           accessibilityLabel="Buscar por título o autor"
           value={texto}
           onChangeText={setTexto}
           placeholder="Título o autor"
-          placeholderTextColor={colores.tintaTenue}
+          placeholderTextColor={colores.textoTenue}
           autoFocus={q === ''}
           autoCorrect={false}
           returnKeyType="search"
@@ -81,8 +81,15 @@ export default function Buscar() {
       <FlatList
         data={cargando || error ? [] : libros}
         keyExtractor={(libro) => libro.isbn}
+        numColumns={2}
+        columnWrapperStyle={estilos.columnas}
+        contentContainerStyle={estilos.lista}
         renderItem={({ item }) => (
-          <FilaLibro libro={item} disponibles={ejemplaresDisponibles(item, prestamos)} />
+          <TarjetaLibro
+          libro={item}
+          disponibles={ejemplaresDisponibles(item, prestamos)}
+          enEspera={esperas[item.isbn]?.tamanio ?? 0}
+        />
         )}
         ListEmptyComponent={renderVacio()}
         keyboardShouldPersistTaps="handled"
@@ -94,7 +101,7 @@ export default function Buscar() {
 const estilos = StyleSheet.create({
   pantalla: {
     flex: 1,
-    backgroundColor: colores.papel,
+    backgroundColor: colores.fondo,
   },
   campoContenedor: {
     flexDirection: 'row',
@@ -102,15 +109,23 @@ const estilos = StyleSheet.create({
     gap: espacios.s,
     margin: espacios.l,
     paddingHorizontal: espacios.m,
-    borderRadius: radios.m,
+    borderRadius: radios.pastilla,
     borderWidth: medidas.borde,
-    borderColor: colores.tinta,
-    backgroundColor: colores.hoja,
+    borderColor: colores.borde,
+    backgroundColor: colores.blanco,
+  },
+  lista: {
+    paddingBottom: espacios.xxl,
+    gap: espacios.m,
+  },
+  columnas: {
+    gap: espacios.m,
+    paddingHorizontal: espacios.l,
   },
   campo: {
     flex: 1,
     minHeight: medidas.areaTactil,
     fontSize: tamanios.medio,
-    color: colores.tinta,
+    color: colores.texto,
   },
 });

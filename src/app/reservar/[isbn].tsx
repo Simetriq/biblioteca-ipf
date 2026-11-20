@@ -87,7 +87,7 @@ const estilos = StyleSheet.create({
   pantalla: {
     flex: 1,
     padding: espacios.xl,
-    backgroundColor: colores.papel,
+    backgroundColor: colores.fondo,
   },
   cabecera: {
     flexDirection: 'row',
@@ -98,33 +98,32 @@ const estilos = StyleSheet.create({
     flex: 1,
   },
   titulo: {
-    fontFamily: fuentes.serif,
+    fontFamily: fuentes.negrita,
     fontSize: tamanios.grande,
-    color: colores.tinta,
+    color: colores.texto,
   },
   autor: {
     marginTop: espacios.xs,
-    fontFamily: fuentes.serif,
-    fontStyle: 'italic',
+    fontFamily: fuentes.negrita,
     fontSize: tamanios.base,
-    color: colores.tintaSuave,
+    color: colores.textoSuave,
   },
   condicion: {
     marginTop: espacios.xl,
     paddingTop: espacios.l,
     borderTopWidth: medidas.borde,
-    borderTopColor: colores.tinta,
+    borderTopColor: colores.texto,
   },
   explicacion: {
     fontSize: tamanios.medio,
     lineHeight: tamanios.medio * 1.45,
-    color: colores.tinta,
+    color: colores.texto,
   },
   rechazo: {
     marginTop: espacios.l,
     fontSize: tamanios.base,
-    fontWeight: '600',
-    color: colores.terracota,
+    fontFamily: fuentes.negrita,
+    color: colores.alerta,
   },
   botones: {
     marginTop: espacios.xl,

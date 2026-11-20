@@ -6,7 +6,7 @@ import { colores, fuentes, tamanios } from '@/constants/tema';
 import { useBiblioteca } from '@/hooks/useBiblioteca';
 
 function colorIcono(activo: boolean): string {
-  return activo ? colores.bosque : colores.tintaTenue;
+  return activo ? colores.primario : colores.textoTenue;
 }
 
 export const unstable_settings = {
@@ -18,8 +18,8 @@ export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: colores.bosque,
-        tabBarInactiveTintColor: colores.tintaTenue,
+        tabBarActiveTintColor: colores.primario,
+        tabBarInactiveTintColor: colores.textoTenue,
         tabBarStyle: estilos.barra,
         tabBarLabelStyle: estilos.etiqueta,
         headerStyle: estilos.cabecera,
@@ -54,25 +54,26 @@ export default function TabsLayout() {
 
 const estilos = StyleSheet.create({
   barra: {
-    backgroundColor: colores.papel,
-    borderTopColor: colores.linea,
+    backgroundColor: colores.fondo,
+    borderTopColor: colores.borde,
   },
   etiqueta: {
-    fontSize: tamanios.mini,
-    fontWeight: '600',
+    fontSize: tamanios.diminuto,
+    fontFamily: fuentes.negrita,
+    textTransform: 'uppercase',
   },
   cabecera: {
-    backgroundColor: colores.papel,
+    backgroundColor: colores.primario,
   },
   tituloCabecera: {
-    fontFamily: fuentes.serif,
-    color: colores.tinta,
+    fontFamily: fuentes.extra,
+    color: colores.blanco,
   },
   escena: {
-    backgroundColor: colores.papel,
+    backgroundColor: colores.fondo,
   },
   insignia: {
-    backgroundColor: colores.terracota,
-    color: colores.hoja,
+    backgroundColor: colores.alerta,
+    color: colores.blanco,
   },
 });

@@ -1,20 +1,32 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import { colores, espacios, fuentes, medidas, radios, tamanios } from '../constants/tema';
-import { colorDeTapa } from '../lib/catalogo';
+import {
+  colores,
+  espacios,
+  estilosTapa,
+  fuentes,
+  letras,
+  medidas,
+  radios,
+  sombras,
+  tamanios,
+} from '../constants/tema';
+import { indiceTapa } from '../lib/catalogo';
 import type { Libro } from '../types';
 
-type Tamanio = 'chica' | 'media' | 'grande';
+type Tamanio = 'chica' | 'media' | 'tarjeta' | 'grande';
 
 type Props = {
   libro: Pick<Libro, 'isbn' | 'titulo' | 'autor'>;
   tamanio?: Tamanio;
 };
 
-// Tapa dibujada: no hay imágenes de portada, así que cada libro
-// tiene su color, un lomo y el título compuesto como en una edición de bolsillo.
+// Tapa dibujada: no hay imágenes de portada, así que cada libro tiene
+// su color y el título compuesto en mayúscula, como una edición moderna.
 export default function Portada({ libro, tamanio = 'chica' }: Props) {
-  const fondo = { backgroundColor: colorDeTapa(libro.isbn) };
+  const tapa = estilosTapa[indiceTapa(libro.isbn)];
+  const fondo = tapa.fondo;
+  const tinta = tapa.texto;
   return (
     <View
       accessible={false}
@@ -22,17 +34,18 @@ export default function Portada({ libro, tamanio = 'chica' }: Props) {
       style={[estilos.tapa, estilos[tamanio], fondo]}>
       <View style={estilos.lomo} />
       {tamanio === 'chica' ? (
-        <Text style={estilos.inicial}>{libro.titulo.charAt(0)}</Text>
+        <Text style={[estilos.inicial, tinta]}>{libro.titulo.charAt(0)}</Text>
       ) : (
         <View style={estilos.contenido}>
-          <View style={estilos.filete} />
-          <Text
-            style={[estilos.titulo, tamanio === 'grande' && estilos.tituloGrande]}
-            numberOfLines={4}>
-            {libro.titulo}
-          </Text>
-          <Text style={estilos.autor} numberOfLines={2}>
+          <Text style={[estilos.autor, tinta]} numberOfLines={2}>
             {libro.autor}
+          </Text>
+          <Text
+            style={[estilos.titulo, tamanio === 'grande' && estilos.tituloGrande, tinta]}
+            numberOfLines={5}
+            adjustsFontSizeToFit
+            minimumFontScale={0.7}>
+            {libro.titulo}
           </Text>
         </View>
       )}
@@ -45,6 +58,7 @@ const estilos = StyleSheet.create({
     borderRadius: radios.s,
     overflow: 'hidden',
     justifyContent: 'center',
+    ...sombras.tarjeta,
   },
   chica: {
     width: medidas.portadaChica.ancho,
@@ -54,6 +68,10 @@ const estilos = StyleSheet.create({
   media: {
     width: medidas.portadaMedia.ancho,
     height: medidas.portadaMedia.alto,
+  },
+  tarjeta: {
+    width: medidas.portadaTarjeta.ancho,
+    height: medidas.portadaTarjeta.alto,
   },
   grande: {
     width: medidas.portadaGrande.ancho,
@@ -65,43 +83,37 @@ const estilos = StyleSheet.create({
     top: 0,
     bottom: 0,
     width: medidas.lomo,
-    backgroundColor: colores.tinta,
-    opacity: 0.25,
+    backgroundColor: colores.lomoSombra,
   },
   inicial: {
-    fontFamily: fuentes.serif,
+    fontFamily: fuentes.extra,
     fontSize: tamanios.portada,
-    color: colores.hoja,
-    opacity: 0.9,
   },
   contenido: {
     flex: 1,
-    paddingLeft: espacios.m + medidas.lomo,
+    paddingLeft: espacios.s + medidas.lomo,
     paddingRight: espacios.s,
     paddingVertical: espacios.m,
-    justifyContent: 'space-between',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: espacios.s,
   },
-  filete: {
-    height: medidas.borde,
-    width: '40%',
-    backgroundColor: colores.hoja,
-    opacity: 0.6,
+  autor: {
+    fontFamily: fuentes.semi,
+    fontSize: tamanios.diminuto,
+    textTransform: 'uppercase',
+    letterSpacing: letras.ancho,
+    textAlign: 'center',
   },
   titulo: {
-    fontFamily: fuentes.serif,
-    fontSize: tamanios.chico,
-    lineHeight: tamanios.chico * 1.25,
-    color: colores.hoja,
+    fontFamily: fuentes.extra,
+    fontSize: tamanios.mini,
+    lineHeight: tamanios.mini * 1.2,
+    textTransform: 'uppercase',
+    textAlign: 'center',
   },
   tituloGrande: {
     fontSize: tamanios.grande,
-    lineHeight: tamanios.grande * 1.2,
-  },
-  autor: {
-    fontSize: tamanios.mini,
-    color: colores.hoja,
-    opacity: 0.8,
-    textTransform: 'uppercase',
-    letterSpacing: 0.8,
+    lineHeight: tamanios.grande * 1.15,
   },
 });

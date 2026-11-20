@@ -1,25 +1,36 @@
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
-import { colores, espacios, tamanios } from '../constants/tema';
+import { colores, espacios, fuentes, letras, medidas, tamanios } from '../constants/tema';
 
 type Props = { texto: string };
 
-// Rótulo chico en versalitas, como los de una ficha de biblioteca.
+// Título de sección en mayúscula con una raya de color debajo.
 export default function Etiqueta({ texto }: Props) {
   return (
-    <Text accessibilityRole="header" style={estilos.etiqueta}>
-      {texto}
-    </Text>
+    <View style={estilos.contenedor}>
+      <Text accessibilityRole="header" style={estilos.etiqueta}>
+        {texto}
+      </Text>
+      <View style={estilos.raya} />
+    </View>
   );
 }
 
 const estilos = StyleSheet.create({
+  contenedor: {
+    marginBottom: espacios.m,
+  },
   etiqueta: {
-    fontSize: tamanios.mini,
-    fontWeight: '700',
-    color: colores.tintaSuave,
+    fontSize: tamanios.chico,
+    fontFamily: fuentes.extra,
+    color: colores.texto,
     textTransform: 'uppercase',
-    letterSpacing: 1.4,
-    marginBottom: espacios.s,
+    letterSpacing: letras.amplio,
+  },
+  raya: {
+    marginTop: espacios.xs,
+    width: medidas.marca.ancho,
+    height: medidas.marca.alto,
+    backgroundColor: colores.primario,
   },
 });

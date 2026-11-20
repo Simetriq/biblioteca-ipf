@@ -18,7 +18,7 @@ export default function BotonIcono({ icono, etiqueta, onPress }: Props) {
       hitSlop={4}
       onPress={onPress}
       style={({ pressed }) => [estilos.boton, pressed && estilos.presionado]}>
-      <Ionicons name={icono} size={iconos.grande} color={colores.tintaSuave} />
+      <Ionicons name={icono} size={iconos.grande} color={colores.textoSuave} />
     </Pressable>
   );
 }
@@ -32,6 +32,6 @@ const estilos = StyleSheet.create({
     justifyContent: 'center',
   },
   presionado: {
-    backgroundColor: colores.papelHondo,
+    backgroundColor: colores.superficie,
   },
 });

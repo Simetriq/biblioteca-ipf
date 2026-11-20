@@ -1,50 +1,68 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
-import { colores, espacios, fuentes, iconos, medidas, radios, tamanios } from '../constants/tema';
+import {
+  colores,
+  espacios,
+  fuentes,
+  iconos,
+  letras,
+  medidas,
+  radios,
+  tamanios,
+} from '../constants/tema';
 import type { Libro } from '../types';
 import Etiqueta from './Etiqueta';
+import EstanteDecorativo from './EstanteDecorativo';
 import TarjetaReciente from './TarjetaReciente';
 
 type Props = { recientes: Libro[] };
 
 export default function EncabezadoCatalogo({ recientes }: Props) {
   return (
-    <View style={estilos.contenedor}>
-      <Text style={estilos.saludo}>¿Qué vas a leer{'\n'}esta semana?</Text>
-
-      <View style={estilos.acciones}>
-        <Pressable
-          accessibilityRole="button"
-          accessibilityLabel="Buscar por título o autor"
-          onPress={() => router.push('/buscar')}
-          style={({ pressed }) => [estilos.buscar, pressed && estilos.presionado]}>
-          <Ionicons name="search" size={iconos.medio} color={colores.tintaSuave} />
-          <Text style={estilos.buscarTexto}>Buscar título o autor</Text>
-        </Pressable>
-        <Pressable
-          accessibilityRole="button"
-          accessibilityLabel="Escanear código de barras"
-          onPress={() => router.push('/escanear')}
-          style={({ pressed }) => [estilos.escanear, pressed && estilos.presionado]}>
-          <Ionicons name="barcode-outline" size={iconos.enorme} color={colores.hoja} />
-          <Text style={estilos.escanearTexto}>Escanear</Text>
-        </Pressable>
+    <View>
+      <View style={estilos.hero}>
+        <EstanteDecorativo />
+        <View style={estilos.velo} />
+        <View style={estilos.heroContenido}>
+          <Text style={estilos.heroTitulo}>Te ayudamos a encontrar tu próximo libro</Text>
+          <Text style={estilos.heroTexto}>Reservalo desde el celular y retiralo en el mostrador.</Text>
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="Escanear código de barras"
+            onPress={() => router.push('/escanear')}
+            style={({ pressed }) => [estilos.heroBoton, pressed && estilos.heroBotonPresionado]}>
+            <Ionicons name="barcode-outline" size={iconos.medio} color={colores.blanco} />
+            <Text style={estilos.heroBotonTexto}>Escanear libro</Text>
+          </Pressable>
+        </View>
       </View>
 
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel="Buscar por título o autor"
+        onPress={() => router.push('/buscar')}
+        style={({ pressed }) => [estilos.buscar, pressed && estilos.buscarPresionado]}>
+        <Text style={estilos.buscarTexto}>Buscar título o autor…</Text>
+        <Ionicons name="search" size={iconos.medio} color={colores.primario} />
+      </Pressable>
+
       {recientes.length > 0 ? (
-        <View style={estilos.recientes}>
+        <View style={estilos.seccion}>
           <Etiqueta texto="Vistos recientemente" />
-          <View style={estilos.filaRecientes}>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={estilos.filaRecientes}>
             {recientes.map((libro) => (
               <TarjetaReciente key={libro.isbn} libro={libro} />
             ))}
-          </View>
+          </ScrollView>
         </View>
       ) : null}
 
-      <View style={estilos.separador}>
+      <View style={estilos.seccion}>
         <Etiqueta texto="Todo el catálogo" />
       </View>
     </View>
@@ -52,68 +70,82 @@ export default function EncabezadoCatalogo({ recientes }: Props) {
 }
 
 const estilos = StyleSheet.create({
-  contenedor: {
-    paddingTop: espacios.l,
+  hero: {
+    height: medidas.hero,
+    backgroundColor: colores.heroFondo,
+    overflow: 'hidden',
+    justifyContent: 'center',
   },
-  saludo: {
-    fontFamily: fuentes.serif,
-    fontSize: tamanios.titulo,
-    lineHeight: tamanios.titulo * 1.15,
-    color: colores.tinta,
-    paddingHorizontal: espacios.l,
-    marginBottom: espacios.l,
+  velo: {
+    ...StyleSheet.absoluteFill,
+    backgroundColor: colores.heroVelo,
   },
-  acciones: {
-    flexDirection: 'row',
+  heroContenido: {
+    alignItems: 'center',
+    paddingHorizontal: espacios.xl,
     gap: espacios.s,
-    paddingHorizontal: espacios.l,
+  },
+  heroTitulo: {
+    fontFamily: fuentes.extra,
+    fontSize: tamanios.grande,
+    lineHeight: tamanios.grande * 1.2,
+    color: colores.blanco,
+    textAlign: 'center',
+    textTransform: 'uppercase',
+  },
+  heroTexto: {
+    fontFamily: fuentes.media,
+    fontSize: tamanios.chico,
+    color: colores.blanco,
+    textAlign: 'center',
+  },
+  heroBoton: {
+    marginTop: espacios.s,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: espacios.s,
+    minHeight: medidas.areaTactil,
+    paddingHorizontal: espacios.xl,
+    borderRadius: radios.s,
+    backgroundColor: colores.primario,
+  },
+  heroBotonPresionado: {
+    backgroundColor: colores.primarioOscuro,
+  },
+  heroBotonTexto: {
+    fontFamily: fuentes.negrita,
+    fontSize: tamanios.chico,
+    color: colores.blanco,
+    textTransform: 'uppercase',
+    letterSpacing: letras.ancho,
   },
   buscar: {
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: espacios.s,
-    minHeight: medidas.areaTactil,
-    paddingHorizontal: espacios.m,
-    borderRadius: radios.m,
+    justifyContent: 'space-between',
+    marginHorizontal: espacios.l,
+    marginTop: -espacios.xl,
+    minHeight: medidas.areaTactil + espacios.s,
+    paddingHorizontal: espacios.l,
+    borderRadius: radios.pastilla,
+    backgroundColor: colores.blanco,
     borderWidth: medidas.borde,
-    borderColor: colores.linea,
-    backgroundColor: colores.hoja,
+    borderColor: colores.borde,
+  },
+  buscarPresionado: {
+    backgroundColor: colores.superficie,
   },
   buscarTexto: {
-    fontSize: tamanios.base,
-    color: colores.tintaTenue,
-  },
-  escanear: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: espacios.xs,
-    minHeight: medidas.areaTactil,
-    paddingHorizontal: espacios.m,
-    borderRadius: radios.m,
-    backgroundColor: colores.bosque,
-  },
-  escanearTexto: {
-    color: colores.hoja,
-    fontWeight: '600',
+    fontFamily: fuentes.regular,
     fontSize: tamanios.chico,
+    color: colores.textoTenue,
   },
-  presionado: {
-    opacity: 0.75,
-  },
-  recientes: {
+  seccion: {
     marginTop: espacios.xl,
     paddingHorizontal: espacios.l,
   },
   filaRecientes: {
-    flexDirection: 'row',
     gap: espacios.m,
-  },
-  separador: {
-    marginTop: espacios.xl,
-    paddingHorizontal: espacios.l,
-    paddingBottom: espacios.xs,
-    borderBottomWidth: medidas.borde,
-    borderBottomColor: colores.tinta,
+    paddingBottom: espacios.s,
   },
 });

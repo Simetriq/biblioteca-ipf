@@ -38,7 +38,7 @@ const estilos = StyleSheet.create({
     marginHorizontal: espacios.l,
     paddingVertical: espacios.m,
     borderBottomWidth: medidas.borde,
-    borderBottomColor: colores.linea,
+    borderBottomColor: colores.borde,
     minHeight: medidas.areaTactil,
   },
   presionada: {
@@ -49,20 +49,20 @@ const estilos = StyleSheet.create({
     alignItems: 'center',
   },
   numeroTexto: {
-    fontFamily: fuentes.serif,
+    fontFamily: fuentes.negrita,
     fontSize: tamanios.grande,
-    color: colores.ocre,
+    color: colores.primario,
   },
   datos: {
     flex: 1,
   },
   titulo: {
-    fontFamily: fuentes.serif,
+    fontFamily: fuentes.negrita,
     fontSize: tamanios.medio,
-    color: colores.tinta,
+    color: colores.texto,
   },
   detalle: {
     fontSize: tamanios.chico,
-    color: colores.tintaSuave,
+    color: colores.textoSuave,
   },
 });

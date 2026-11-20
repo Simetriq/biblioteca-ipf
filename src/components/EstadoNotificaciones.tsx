@@ -20,7 +20,7 @@ export default function EstadoNotificaciones({ estado }: Props) {
       <Ionicons
         name={activas ? 'notifications-outline' : 'notifications-off-outline'}
         size={iconos.chico}
-        color={activas ? colores.bosque : colores.tintaSuave}
+        color={activas ? colores.primario : colores.textoSuave}
       />
       <Text style={estilos.texto}>{TEXTOS[estado]}</Text>
     </View>
@@ -38,6 +38,6 @@ const estilos = StyleSheet.create({
   texto: {
     flex: 1,
     fontSize: tamanios.chico,
-    color: colores.tintaSuave,
+    color: colores.textoSuave,
   },
 });

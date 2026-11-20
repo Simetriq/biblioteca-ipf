@@ -108,7 +108,7 @@ export default function DetalleLibro() {
 const estilos = StyleSheet.create({
   pantalla: {
     flex: 1,
-    backgroundColor: colores.papel,
+    backgroundColor: colores.fondo,
   },
   contenido: {
     padding: espacios.xl,
@@ -119,18 +119,17 @@ const estilos = StyleSheet.create({
     marginBottom: espacios.xl,
   },
   titulo: {
-    fontFamily: fuentes.serif,
+    fontFamily: fuentes.negrita,
     fontSize: tamanios.titulo,
     lineHeight: tamanios.titulo * 1.15,
-    color: colores.tinta,
+    color: colores.texto,
     textAlign: 'center',
   },
   autor: {
     marginTop: espacios.xs,
-    fontFamily: fuentes.serif,
-    fontStyle: 'italic',
+    fontFamily: fuentes.negrita,
     fontSize: tamanios.medio,
-    color: colores.tintaSuave,
+    color: colores.textoSuave,
     textAlign: 'center',
   },
   ficha: {
@@ -139,30 +138,29 @@ const estilos = StyleSheet.create({
     paddingVertical: espacios.l,
     borderTopWidth: medidas.borde,
     borderBottomWidth: medidas.borde,
-    borderColor: colores.tinta,
+    borderColor: colores.texto,
   },
   dato: {
     flex: 1,
     alignItems: 'center',
   },
   valor: {
-    fontFamily: fuentes.serif,
+    fontFamily: fuentes.negrita,
     fontSize: tamanios.medio,
-    color: colores.tinta,
+    color: colores.texto,
   },
   isbn: {
     marginTop: espacios.s,
     marginBottom: espacios.xl,
     fontFamily: fuentes.mono,
     fontSize: tamanios.mini,
-    color: colores.tintaTenue,
+    color: colores.textoTenue,
     textAlign: 'center',
   },
   propio: {
-    fontFamily: fuentes.serif,
-    fontStyle: 'italic',
+    fontFamily: fuentes.negrita,
     fontSize: tamanios.base,
-    color: colores.bosque,
+    color: colores.primario,
     textAlign: 'center',
   },
   volver: {
@@ -171,9 +169,9 @@ const estilos = StyleSheet.create({
   enlace: {
     minHeight: medidas.areaTactil,
     paddingVertical: espacios.m,
-    fontFamily: fuentes.serif,
+    fontFamily: fuentes.negrita,
     fontSize: tamanios.medio,
-    color: colores.bosque,
+    color: colores.primario,
     textDecorationLine: 'underline',
   },
 });

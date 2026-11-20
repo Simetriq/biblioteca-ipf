@@ -103,7 +103,7 @@ export default function Escanear() {
 const estilos = StyleSheet.create({
   pantalla: {
     flex: 1,
-    backgroundColor: colores.papel,
+    backgroundColor: colores.fondo,
   },
   contenido: {
     padding: espacios.l,
@@ -113,19 +113,19 @@ const estilos = StyleSheet.create({
     gap: espacios.m,
     borderRadius: radios.l,
     borderWidth: medidas.borde,
-    borderColor: colores.linea,
+    borderColor: colores.borde,
     borderStyle: 'dashed',
-    backgroundColor: colores.hoja,
+    backgroundColor: colores.blanco,
   },
   tarjetaTitulo: {
-    fontFamily: fuentes.serif,
+    fontFamily: fuentes.negrita,
     fontSize: tamanios.grande,
-    color: colores.tinta,
+    color: colores.texto,
   },
   tarjetaTexto: {
     fontSize: tamanios.base,
     lineHeight: tamanios.base * 1.45,
-    color: colores.tintaSuave,
+    color: colores.textoSuave,
   },
   manual: {
     marginTop: espacios.xl,

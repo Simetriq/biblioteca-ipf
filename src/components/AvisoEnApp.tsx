@@ -26,14 +26,14 @@ const estilos = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: espacios.l,
     marginBottom: espacios.s,
-    backgroundColor: colores.ocreClaro,
+    backgroundColor: colores.acentoClaro,
     borderRadius: radios.m,
     overflow: 'hidden',
   },
   borde: {
     alignSelf: 'stretch',
     width: medidas.lomo,
-    backgroundColor: colores.ocre,
+    backgroundColor: colores.primario,
   },
   texto: {
     flex: 1,
@@ -41,6 +41,6 @@ const estilos = StyleSheet.create({
     paddingHorizontal: espacios.m,
     fontSize: tamanios.chico,
     lineHeight: tamanios.chico * 1.4,
-    color: colores.tinta,
+    color: colores.texto,
   },
 });

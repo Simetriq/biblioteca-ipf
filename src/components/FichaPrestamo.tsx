@@ -37,8 +37,8 @@ export default function FichaPrestamo({ prestamo, onCambiarRecordatorio, onDevol
             accessibilityLabel={`Recordarme la devolución de ${prestamo.titulo}`}
             value={prestamo.recordar}
             onValueChange={(valor) => onCambiarRecordatorio(prestamo, valor)}
-            trackColor={{ false: colores.linea, true: colores.bosque }}
-            thumbColor={colores.hoja}
+            trackColor={{ false: colores.borde, true: colores.primario }}
+            thumbColor={colores.blanco}
           />
           <Text style={estilos.recordarTexto}>Recordarme</Text>
         </View>
@@ -52,10 +52,10 @@ const estilos = StyleSheet.create({
   ficha: {
     marginHorizontal: espacios.l,
     marginBottom: espacios.m,
-    backgroundColor: colores.hoja,
+    backgroundColor: colores.blanco,
     borderRadius: radios.m,
     borderWidth: medidas.borde,
-    borderColor: colores.linea,
+    borderColor: colores.borde,
   },
   cabecera: {
     flexDirection: 'row',
@@ -67,39 +67,39 @@ const estilos = StyleSheet.create({
     gap: espacios.xs,
   },
   titulo: {
-    fontFamily: fuentes.serif,
+    fontFamily: fuentes.negrita,
     fontSize: tamanios.medio,
-    color: colores.tinta,
+    color: colores.texto,
   },
   isbn: {
     fontFamily: fuentes.mono,
     fontSize: tamanios.mini,
-    color: colores.tintaTenue,
+    color: colores.textoTenue,
   },
   sello: {
     alignItems: 'center',
     paddingHorizontal: espacios.s,
     paddingVertical: espacios.xs,
     borderWidth: medidas.borde * 2,
-    borderColor: colores.terracota,
+    borderColor: colores.alerta,
     borderRadius: radios.s,
     transform: [{ rotate: '-4deg' }],
   },
   selloRotulo: {
     fontSize: tamanios.mini,
-    fontWeight: '700',
-    color: colores.terracota,
+    fontFamily: fuentes.negrita,
+    color: colores.alerta,
     textTransform: 'uppercase',
     letterSpacing: 1,
   },
   selloFecha: {
     fontFamily: fuentes.mono,
     fontSize: tamanios.chico,
-    color: colores.terracota,
+    color: colores.alerta,
   },
   selloDias: {
     fontSize: tamanios.mini,
-    color: colores.terracota,
+    color: colores.alerta,
   },
   pie: {
     flexDirection: 'row',
@@ -108,7 +108,7 @@ const estilos = StyleSheet.create({
     paddingHorizontal: espacios.l,
     paddingVertical: espacios.s,
     borderTopWidth: medidas.borde,
-    borderTopColor: colores.linea,
+    borderTopColor: colores.borde,
     borderStyle: 'dashed',
   },
   recordar: {
@@ -119,6 +119,6 @@ const estilos = StyleSheet.create({
   },
   recordarTexto: {
     fontSize: tamanios.base,
-    color: colores.tinta,
+    color: colores.texto,
   },
 });

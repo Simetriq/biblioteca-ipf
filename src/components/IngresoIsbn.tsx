@@ -25,7 +25,7 @@ export default function IngresoIsbn({ onIsbn, error }: Props) {
           value={texto}
           onChangeText={setTexto}
           placeholder="978…"
-          placeholderTextColor={colores.tintaTenue}
+          placeholderTextColor={colores.textoTenue}
           keyboardType="number-pad"
           maxLength={17}
           returnKeyType="go"
@@ -46,9 +46,9 @@ const estilos = StyleSheet.create({
     gap: espacios.s,
   },
   rotulo: {
-    fontFamily: fuentes.serif,
+    fontFamily: fuentes.negrita,
     fontSize: tamanios.medio,
-    color: colores.tinta,
+    color: colores.texto,
   },
   fila: {
     flexDirection: 'row',
@@ -60,18 +60,18 @@ const estilos = StyleSheet.create({
     paddingHorizontal: espacios.m,
     borderRadius: radios.m,
     borderWidth: medidas.borde,
-    borderColor: colores.linea,
-    backgroundColor: colores.hoja,
+    borderColor: colores.borde,
+    backgroundColor: colores.blanco,
     fontFamily: fuentes.mono,
     fontSize: tamanios.base,
-    color: colores.tinta,
+    color: colores.texto,
   },
   ayuda: {
     fontSize: tamanios.mini,
-    color: colores.tintaSuave,
+    color: colores.textoSuave,
   },
   error: {
-    color: colores.terracota,
-    fontWeight: '600',
+    color: colores.alerta,
+    fontFamily: fuentes.negrita,
   },
 });

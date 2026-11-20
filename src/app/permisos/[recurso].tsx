@@ -32,6 +32,6 @@ const estilos = StyleSheet.create({
     flex: 1,
     padding: espacios.xl,
     justifyContent: 'center',
-    backgroundColor: colores.papel,
+    backgroundColor: colores.fondo,
   },
 });

@@ -42,7 +42,7 @@ export default function ExplicacionPermiso({ recurso, isbn }: Props) {
   return (
     <View>
       <View style={estilos.icono}>
-        <Ionicons name={explicacion.icono} size={tamanios.portada} color={colores.bosque} />
+        <Ionicons name={explicacion.icono} size={tamanios.portada} color={colores.primario} />
       </View>
       <Text style={estilos.titulo}>{explicacion.titulo}</Text>
       <Text style={estilos.texto}>{bloqueado ? explicacion.bloqueado : explicacion.beneficio}</Text>
@@ -66,15 +66,15 @@ const estilos = StyleSheet.create({
     marginBottom: espacios.l,
   },
   titulo: {
-    fontFamily: fuentes.serif,
+    fontFamily: fuentes.negrita,
     fontSize: tamanios.titulo,
-    color: colores.tinta,
+    color: colores.texto,
   },
   texto: {
     marginTop: espacios.m,
     fontSize: tamanios.medio,
     lineHeight: tamanios.medio * 1.5,
-    color: colores.tintaSuave,
+    color: colores.textoSuave,
   },
   boton: {
     marginTop: espacios.xxl,

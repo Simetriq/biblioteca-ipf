@@ -32,6 +32,6 @@ const estilos = StyleSheet.create({
   },
   titulo: {
     fontSize: tamanios.mini,
-    color: colores.tintaSuave,
+    color: colores.textoSuave,
   },
 });

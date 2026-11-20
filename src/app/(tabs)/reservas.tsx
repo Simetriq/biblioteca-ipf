@@ -122,9 +122,9 @@ const estilos = StyleSheet.create({
     paddingTop: espacios.l,
   },
   titulo: {
-    fontFamily: fuentes.serif,
+    fontFamily: fuentes.negrita,
     fontSize: tamanios.titulo,
-    color: colores.tinta,
+    color: colores.texto,
     paddingHorizontal: espacios.l,
     marginBottom: espacios.s,
   },
@@ -134,9 +134,8 @@ const estilos = StyleSheet.create({
   },
   seccionVacia: {
     paddingHorizontal: espacios.l,
-    fontFamily: fuentes.serif,
-    fontStyle: 'italic',
+    fontFamily: fuentes.negrita,
     fontSize: tamanios.base,
-    color: colores.tintaTenue,
+    color: colores.textoTenue,
   },
 });
