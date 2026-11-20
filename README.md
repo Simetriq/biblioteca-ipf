@@ -56,7 +56,7 @@ El grupo `(catalogo)` no agrega segmentos a la URL. Por eso el detalle responde 
 
 | Carpeta | Contenido |
 |---|---|
-| `components/` | Un componente por archivo (`FilaLibro`, `Portada`, `FichaPrestamo`, `VisorEscaner`…) |
+| `components/` | Un componente por archivo (`TarjetaLibro`, `Portada`, `FichaPrestamo`, `VisorEscaner`…) |
 | `hooks/` | `useLibros`, `useBusqueda`, `usePermiso`, `useBiblioteca` |
 | `lib/` | `api.ts` (entregado), `catalogo`, `isbn`, `fechas`, `notificaciones`, `almacenamiento` |
 | `context/` | `BibliotecaContext`: préstamos, listas de espera, recientes, avisos y sesión |

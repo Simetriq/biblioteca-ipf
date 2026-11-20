@@ -289,7 +289,7 @@ Lo verificaría con una **development build** (`npx expo run:android` o `eas bui
 | 18-20 | Efecto **sin array de dependencias** | Error de ejecución / rendimiento | Corre después de cada render, y cada respuesta provoca otro render: pedidos infinitos (ver b). Usar `useLibros` con `[intento]` |
 | 18-20 | Sin limpieza | Error de ejecución | Si la pantalla se desmonta o llega una respuesta vieja, se hace `setState` igual. Usar una bandera `activo` |
 | 19 | Sin `catch` ni estados de carga, error o vacío | Error de ejecución / mala práctica | 1 de cada 5 veces `obtenerLibros` falla: rechazo no manejado y pantalla en blanco para siempre. Mostrar cargando, error con «Reintentar» y vacío |
-| 22-30 | Componente `Fila` declarado **dentro** de `Catalogo` | Rendimiento / mala práctica | Es un componente distinto en cada render: React desmonta y vuelve a montar todas las filas. Moverlo a `src/components/FilaLibro.tsx` |
+| 22-30 | Componente `Fila` declarado **dentro** de `Catalogo` | Rendimiento / mala práctica | Es un componente distinto en cada render: React desmonta y vuelve a montar todas las filas. Moverlo a su propio archivo (en mi app, `src/components/TarjetaLibro.tsx`) |
 | 22 | `libro: any` en las props | Mala práctica | Tipar `{ libro: Libro }` |
 | 24 | `'/libro/' + libro.isbn` | Mala práctica | Concatenar strings pierde las rutas tipadas. Usar `{ pathname: '/libro/[isbn]', params: { isbn } }` |
 | 25 | Estilo en línea con color y tamaños fijos | Mala práctica | No usa `StyleSheet.create` ni el tema, y crea un objeto en cada render. Pasarlo a `estilos` con valores de `tema.ts` |
@@ -311,7 +311,7 @@ Si `obtenerLibros()` devolviera **siempre el mismo array**, el segundo `setLibro
 ```tsx
 export default function Catalogo() {
   const { libros, cargando, error, reintentar } = useLibros();
-  const { recientes, prestamos } = useBiblioteca();
+  const { recientes, prestamos, esperas } = useBiblioteca();
 
   function renderVacio() {
     if (cargando) return <EstadoCarga mensaje="Buscando en los estantes…" />;
@@ -332,8 +332,14 @@ export default function Catalogo() {
     <FlatList
       data={cargando || error ? [] : libros}
       keyExtractor={(libro) => libro.isbn}
+      numColumns={2}
+      columnWrapperStyle={estilos.columnas}
       renderItem={({ item }) => (
-        <FilaLibro libro={item} disponibles={ejemplaresDisponibles(item, prestamos)} />
+        <TarjetaLibro
+          libro={item}
+          disponibles={ejemplaresDisponibles(item, prestamos)}
+          enEspera={esperas[item.isbn]?.tamanio ?? 0}
+        />
       )}
       ListHeaderComponent={<EncabezadoCatalogo recientes={recientes} />}
       ListEmptyComponent={renderVacio()}
