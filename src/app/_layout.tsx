@@ -1,18 +1,20 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
+import NavegacionRaiz from '@/components/NavegacionRaiz';
+import { BibliotecaProvider } from '@/context/BibliotecaContext';
 
 SplashScreen.preventAutoHideAsync();
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+// Un deep link a /buscar (o cualquier pantalla del Stack raíz)
+// deja las pestañas debajo, para que "atrás" tenga a dónde volver.
+export const unstable_settings = {
+  anchor: '(tabs)',
+};
+
+export default function RootLayout() {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
+    <BibliotecaProvider>
+      <NavegacionRaiz />
+    </BibliotecaProvider>
   );
 }
