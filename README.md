@@ -170,4 +170,30 @@ Tests:       7 passed, 7 total
 
 ## Capturas
 
-Pendiente: agregar en `capturas/` las capturas del teléfono (catálogo cargando, con error y con datos; buscador; detalle inexistente; reserva con y sin ejemplares; escáner en sus cuatro estados; notificación recibida; mostrador antes y después de «Entregar al siguiente»; 404).
+Están en la carpeta [`capturas/`](capturas/). Se tomaron con la versión web de la app (`npx expo start --web`) en un tamaño de teléfono (390 × 844).
+
+| # | Pantalla | Archivo |
+|---|----------|---------|
+| 1 | Catálogo cargando | [01-catalogo-cargando.png](capturas/01-catalogo-cargando.png) |
+| 2 | Catálogo con error | [02-catalogo-error.png](capturas/02-catalogo-error.png) |
+| 3 | Catálogo con datos | [03-catalogo-con-datos.png](capturas/03-catalogo-con-datos.png) |
+| 4 | Buscador (`/buscar?q=borges`) | [04-buscador.png](capturas/04-buscador.png) |
+| 5 | Detalle inexistente (ISBN válido que no está) | [05-detalle-inexistente.png](capturas/05-detalle-inexistente.png) |
+| 6 | Detalle con ISBN inválido (`/libro/123`) | [06-detalle-isbn-invalido.png](capturas/06-detalle-isbn-invalido.png) |
+| 7 | Reserva con ejemplares | [07-reserva-con-ejemplares.png](capturas/07-reserva-con-ejemplares.png) |
+| 8 | Reserva sin ejemplares (lista de espera) | [08-reserva-sin-ejemplares.png](capturas/08-reserva-sin-ejemplares.png) |
+| 9 | Mis reservas después de confirmar | [09-mis-reservas-tras-confirmar.png](capturas/09-mis-reservas-tras-confirmar.png) |
+| 10 | Mostrador antes de «Entregar al siguiente» | [10-mostrador-antes.png](capturas/10-mostrador-antes.png) |
+| 11 | Mostrador después de «Entregar al siguiente» | [11-mostrador-despues.png](capturas/11-mostrador-despues.png) |
+| 12 | Aviso recibido dentro de la app | [12-aviso-recibido-en-app.png](capturas/12-aviso-recibido-en-app.png) |
+| 13 | Pantalla 404 | [13-pantalla-404.png](capturas/13-pantalla-404.png) |
+| 14 | Escáner: cargando | [14-escaner-cargando.png](capturas/14-escaner-cargando.png) |
+| 15 | Escáner: preguntable | [15-escaner-preguntable.png](capturas/15-escaner-preguntable.png) |
+| 16 | Escáner: concedido | [16-escaner-concedido.png](capturas/16-escaner-concedido.png) |
+| 17 | Escáner: bloqueado | [17-escaner-bloqueado.png](capturas/17-escaner-bloqueado.png) |
+| 18 | Pantalla previa del permiso de cámara | [18-permiso-camara-pantalla-previa.png](capturas/18-permiso-camara-pantalla-previa.png) |
+
+Notas:
+
+- En web, `expo-camera` siempre informa `canAskAgain: true`, así que para la captura del estado «bloqueado» se forzó ese valor en `false`. La pantalla que se ve es la de la app, sin cambios.
+- En web no se muestran notificaciones del sistema, por eso la captura 12 es el aviso dentro de la app. Falta agregar desde un teléfono la notificación del sistema y el diálogo de cámara con el texto de propósito (development build).
